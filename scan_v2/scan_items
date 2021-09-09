@@ -1,0 +1,28 @@
+
+1 作業系統弱點掃描 - Nesus
+2 網頁介面弱點掃描 - WebInspec
+3 敏感性資料儲存安全測試 ssh login 
+4 敏感性資料傳輸安全測試 Burp Suite, Wireshark
+5 網路服務最小化測試 Nmap -sT/-sU 0-65535
+6 網頁管理介面安全 - 設定管理 Nikto
+7 網頁管理介面安全 - 使用者認證 
+8 網頁管理介面安全 - 連線管理 Burp Suite -- Cookie
+9 網頁管理介面安全 - 使用者授權 Burp Suite -- Cookie
+10 網頁管理介面安全 - 邏輯漏洞 
+11 網頁管理介面安全 - 輸入驗證 ZAP, XSSer, SQLmap  
+12 應用程式 - HTTP(S)安全測試 sslscan
+13 應用程式 - UPnP安全測試 Nmap -sU --script=upnp
+14 應用程式 - DNS安全測試 nslookup
+15 第三方軟體網路漏洞 
+16 韌體靜態檢測 Binwalk
+17 使用者認證 - 遠端指令管理介面 ettercap
+18 使用者認證 - 行動應用App介面 
+19 使用者認證 - 本地實體介面 
+20 使用者認證 - 密碼破解 Hydra
+21 API安全輸入測試 
+22 API鑑別機制強度測試 
+23 無線網路安全測試 
+24 藍牙安全測試 
+//25 通訊協定模糊測試 
+26 韌體安全
+
