@@ -1,0 +1,45 @@
+Version: [32m2.0.10-static[0m
+OpenSSL 1.1.1l-dev  xx XXX xxxx
+[0m
+[32mConnected to 192.168.50.200[0m
+
+Testing SSL server [32m192.168.50.200[0m on port [32m443[0m using SNI name [32m192.168.50.200[0m
+
+  [1;34mSSL/TLS Protocols:[0m
+SSLv2     [32mdisabled[0m
+SSLv3     [32mdisabled[0m
+TLSv1.0   [33menabled[0m
+TLSv1.1   [32mdisabled[0m
+TLSv1.2   disabled
+TLSv1.3   [33mdisabled[0m
+
+  [1;34mTLS Fallback SCSV:[0m
+Server [31mdoes not[0m support TLS Fallback SCSV
+
+  [1;34mTLS renegotiation:[0m
+[31mInsecure[0m session renegotiation supported
+
+  [1;34mTLS Compression:[0m
+Compression [32mdisabled[0m
+
+  [1;34mHeartbleed:[0m
+TLSv1.0 [32mnot vulnerable[0m to heartbleed
+
+  [1;34mSupported Server Cipher(s):[0m
+[32mPreferred[0m [33mTLSv1.0[0m  [32m256[0m bits  AES256-SHA                   
+Accepted  [33mTLSv1.0[0m  [32m128[0m bits  AES128-SHA                   
+Accepted  [33mTLSv1.0[0m  [32m128[0m bits  IDEA-CBC-SHA                 
+Accepted  [33mTLSv1.0[0m  [32m128[0m bits  [33mRC4-SHA                      [0m
+Accepted  [33mTLSv1.0[0m  [32m128[0m bits  [33mRC4-MD5                      [0m
+Accepted  [33mTLSv1.0[0m  [32m112[0m bits  [33mDES-CBC3-SHA                 [0m
+Accepted  [33mTLSv1.0[0m  [31m56[0m bits   [33mTLS_RSA_WITH_DES_CBC_SHA     [0m
+
+  [1;34mSSL Certificate:[0m
+Signature Algorithm: [31mmd5WithRSAEncryption[0m
+RSA Key Strength:    [31m1024[0m
+
+Subject:  OpenSSL Group
+Issuer:   [31mOpenSSL Group[0m
+
+Not valid before: [32mJan  1 00:16:20 2005 GMT[0m
+Not valid after:  [31mDec 30 00:16:20 2014 GMT[0m

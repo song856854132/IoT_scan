@@ -71,9 +71,9 @@ NIKTO()
 # Section7 網頁管理介面安全 - 使用者認證 
 # Section8 網頁管理介面安全 - 連線管理 Burp Suite -- Cookie
 # Section9 網頁管理介面安全 - 使用者授權 Burp Suite -- Cookie
+echo "Readline HTTP Header from Burp Suite..."
 while read line 
 do
-    echo "Readline HTTP Header from Burp Suite..."
     # HTTP Authenticaiton checking
     if [[ $line == Authorization:* ]] || [[ $line == *api_key=* ]] || [[ $line == X-API-Key:* ]]
     then
@@ -107,9 +107,12 @@ done < $burp_decode
 # Section10 網頁管理介面安全 - 邏輯漏洞
 WEB_FUZZ()
 {
+    read -r -p "Does it support https(SSL)? [Y/n]: " yn_ssl
     echo "Running Dirbuster..."
-    gobuster dir -u http://$ip_addr -w /usr/share/wordlists/dirb/common.txt > Section10_DIR
-
+    case $yn_xss in 
+        [Yy]*) gobuster dir -u https://$ip_addr -w /usr/share/wordlists/dirb/common.txt > Section10_DIR;;
+        [Nn]*) gobuster dir -u http://$ip_addr -w /usr/share/wordlists/dirb/common.txt > Section10_DIR;;
+    esac
     echo "Running WhatWeb..."
     whatweb $ip_addr -v > Section10_WEB
 }
@@ -117,12 +120,12 @@ WEB_FUZZ()
 XSSER()
 {
     echo "Running Xsser..."
-    xsser --wizard > Section11_XSS
+    xsser --wizard | tee Section11_XSS
 }
 SQLMAP()
 {
     echo "Running Sqlmap..."
-    sqlmap --wizard > Section11_SQL
+    sqlmap --wizard | tee Section11_SQL
 }
 # Section12 應用程式 - HTTP(S)安全測試
 SSLSCAN()
@@ -145,7 +148,7 @@ BIN()
 }
 
 # Execute and Write into Test Rreport
-NMAP
+#NMAP
 if [[ -e Section5_TCP ]] || [[ -e Section5_UDP ]]
 then
         printf "\nSection5 網路服務最小化測試\n" >> recon_results
@@ -171,7 +174,7 @@ fi
 if [[ http_open_counter ]]
 then
     WEB_FUZZ
-    if [[ -e  ]] || [[ -e  ]]
+    if [[ -e Section10_DIR ]] || [[ -e Section10_WEB ]]
     then
             printf "\nSection10 網頁管理介面安全 - 邏輯漏洞Fuzz\n" >> recon_results
             cat Section10_DIR  >> recon_results

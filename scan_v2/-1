@@ -1,0 +1,4 @@
+_comp_locale:12: permission denied: /dev/null
+_comp_locale:12: permission denied: /dev/null
+fatal: open /dev/null or dup failed: Permission denied
+fatal: open /dev/null or dup failed: Permission denied
