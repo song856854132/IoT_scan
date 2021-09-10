@@ -114,6 +114,10 @@ WEB_FUZZ()
         [Nn]*) gobuster dir -u http://$ip_addr -w /usr/share/wordlists/dirb/common.txt > Section10_DIR;;
     esac
     echo "Running WhatWeb..."
+    case $yn_xss in 
+        [Yy]*) whatweb https://$ip_addr -v > Section10_WEB;;
+        [Nn]*) whatweb http://$ip_addr -v > Section10_WEB;;
+    esac
     whatweb $ip_addr -v > Section10_WEB
 }
 # Section11 網頁管理介面安全 - 輸入驗證 ZAP, XSSer, SQLmap
