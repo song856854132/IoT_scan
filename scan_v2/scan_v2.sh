@@ -57,7 +57,7 @@ rm recon_results
 NMAP()
 {
     echo "Running Nmap..."
-    timeout 600 nmap -sT -p 0-65535 -O -A -sC $ip_addr > Section5_TCP
+    timeout 600 nmap -sT -p 0-65535 -O -A -sC $ip_addr >  Section5_TCP
     timeout 600 nmap -sU -p 0-65535 -O -A -sC $ip_addr > Section5_UDP
     timeout 600 nmap -sU --script=upnp-info.nse -p 1900 $ip_addr > Section13_UPnP
 }
@@ -66,7 +66,7 @@ NMAP()
 NIKTO()
 {
     echo "Running Nikto..."
-    nikto -h $ip_addr > Section6
+    nikto -h $ip_addr | tee Section6
 }
 # Section7 網頁管理介面安全 - 使用者認證 
 # Section8 網頁管理介面安全 - 連線管理 Burp Suite -- Cookie
@@ -110,13 +110,13 @@ WEB_FUZZ()
     read -r -p "Does it support https(SSL)? [Y/n]: " yn_ssl
     echo "Running Dirbuster..."
     case $yn_xss in 
-        [Yy]*) gobuster dir -u https://$ip_addr -w /usr/share/wordlists/dirb/common.txt > Section10_DIR;;
-        [Nn]*) gobuster dir -u http://$ip_addr -w /usr/share/wordlists/dirb/common.txt > Section10_DIR;;
+        [Yy]*) gobuster dir -u https://$ip_addr -w /usr/share/wordlists/dirb/common.txt | tee Section10_DIR;;
+        [Nn]*) gobuster dir -u http://$ip_addr -w /usr/share/wordlists/dirb/common.txt | tee Section10_DIR;;
     esac
     echo "Running WhatWeb..."
     case $yn_xss in 
-        [Yy]*) whatweb https://$ip_addr -v > Section10_WEB;;
-        [Nn]*) whatweb http://$ip_addr -v > Section10_WEB;;
+        [Yy]*) whatweb https://$ip_addr -v | tee Section10_WEB;;
+        [Nn]*) whatweb http://$ip_addr -v | tee Section10_WEB;;
     esac
     whatweb $ip_addr -v > Section10_WEB
 }
@@ -135,7 +135,7 @@ SQLMAP()
 SSLSCAN()
 {
     echo "Running Sslscan..."
-    sslscan $ip_addr > Section12
+    sslscan $ip_addr | tee Section12
 }
 # Section14 應用程式 - DNS安全測試
 DNS()
@@ -152,7 +152,7 @@ BIN()
 }
 
 # Execute and Write into Test Rreport
-#NMAP
+NMAP
 if [[ -e Section5_TCP ]] || [[ -e Section5_UDP ]]
 then
         printf "\nSection5 網路服務最小化測試\n" >> recon_results
@@ -185,6 +185,11 @@ then
             cat Section10_WEB  >> recon_results
     fi
 fi
+if [[ -e Section11 ]]
+then
+        printf "\nSection11 網頁管理介面安全 - 輸入驗證\n" >> recon_results
+        cat Section11  >> recon_results
+fi
 read -r -p "Do you want to execute XSS attack? [Y/n]: " yn_xss
 case $yn_xss in 
         [Yy]*) XSSER;;
@@ -192,7 +197,7 @@ case $yn_xss in
 esac
 if [[ -e Section11_XSS ]]
 then
-        printf "\nSection11 網頁管理介面安全 - 輸入驗證\n" >> recon_results
+        #iprintf "\nSection11 網頁管理介面安全 - 輸入驗證\n" >> recon_results
         cat Section11_XSS  >> recon_results
 fi
 if [[ -e Section11_SQL ]]
@@ -212,4 +217,4 @@ case $yn_sql in
         [Yy]*) read -r -p "testing bin file: " binfile; BIN $binfile;;
         [Nn]*) echo "Okay, then";;
 esac
-
+rm Section*
